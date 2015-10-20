@@ -40,6 +40,38 @@ def main():
     print(args)
     return
 
+def genpass(alphabet,length):
+    """Returns a secure random password
+
+    :alphabet: sequence of symbols to use in password generation
+    :length: lenght of the password
+    :returns: a sequence of randomly picked symbols
+
+    """
+
+    password = "".join([random.choice(alphabet) for _ in range(length)])
+    return password
+
+def menmonic(password):
+    """Returns a mnemonic, a human friendly bag of words, that helps remember
+    the password.
+
+    :password: collection of symbols for the mnemonic
+    :returns: mnemonic
+
+    """
+
+    # lowercase == NATO Phonetic Alphabet,
+    # uppercase == Western Union Phonetic Alphabet
+    # ref : http://www.osric.com/chris/phonetic.html
+
+    return
+
+
+
+
+
+
 if __name__ == '__main__':
     main()
 
