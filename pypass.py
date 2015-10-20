@@ -37,7 +37,13 @@ def main():
             )
 
     args = parser.parse_args()
-    print(args)
+
+    password = genpass(args.alphabet, args.length)
+    print(password)
+
+    if args.mnemonic:
+        print(mnemonic(password))
+
     return
 
 def genpass(alphabet,length):
@@ -52,7 +58,7 @@ def genpass(alphabet,length):
     password = "".join([random.choice(alphabet) for _ in range(length)])
     return password
 
-def menmonic(password):
+def mnemonic(password):
     """Returns a mnemonic, a human friendly bag of words, that helps remember
     the password.
 
@@ -62,15 +68,75 @@ def menmonic(password):
     """
 
     # lowercase == NATO Phonetic Alphabet,
-    # uppercase == Western Union Phonetic Alphabet
+    # uppercase == Western Union Phonetic Alphabet + modif to solve conflicts
     # ref : http://www.osric.com/chris/phonetic.html
+    mapping = {
+        'a':'Alpha',
+        'b':'Bravo',
+        'c':'Charlie',
+        'd':'Delta',
+        'e':'Echo',
+        'f':'Foxtrot',
+        'g':'Golf',
+        'h':'Hotel',
+        'i':'India',
+        'j':'Juliet',
+        'k':'Kilo',
+        'l':'Lima',
+        'm':'Mike',
+        'n':'November',
+        'o':'Oscar',
+        'p':'Papa',
+        'q':'Quebec',
+        'r':'Romeo',
+        's':'Sierra',
+        't':'Tango',
+        'u':'Uniform',
+        'v':'Victor',
+        'w':'Whiskey',
+        'x':'X-ray',
+        'y':'Yankee',
+        'z':'Zulu',
+        'A':'Adams',
+        'B':'Boston',
+        'C':'Chicago',
+        'D':'Denver',
+        'E':'Easy',
+        'F':'Frank',
+        'G':'George',
+        'H':'Henry',
+        'I':'Ida',
+        'J':'John',
+        'K':'King',
+        'L':'Lincoln',
+        'M':'Mary',
+        'N':'New York',
+        'O':'Ocean',
+        'P':'Peter',
+        'Q':'Queen',
+        'R':'Roger',
+        'S':'Sugar',
+        'T':'Thomas',
+        'U':'Union',
+        'V':'Victor',
+        'W':'William',
+        'X':'X-file',
+        'Y':'Young',
+        'Z':'Zeta',
+        '0':'Zero',
+        '1':'Wun',
+        '2':'Too',
+        '3':'Tree',
+        '4':'Fower',
+        '5':'Fife',
+        '6':'Six',
+        '7':'Seven',
+        '8':'Ait',
+        '9':'Niner'}
 
-    return
-
-
-
-
-
+    # if alphabet symbol not found in table, just return it
+    result = " ".join([ mapping.get(symbol,symbol) for symbol in password ])
+    return result
 
 if __name__ == '__main__':
     main()
